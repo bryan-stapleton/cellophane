@@ -1,1 +1,3 @@
 # cellophane
+
+a thin wrapper
