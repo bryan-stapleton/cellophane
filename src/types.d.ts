@@ -25,16 +25,10 @@ export type CellophaneWrapperProps = {
   callback?: () => any | void;
 };
 
-export interface CellophaneWrappedObject<T> {
-  identity: () => T;
-  children: ReactNode[];
-  (): any;
-}
-
 export type CellophaneWrapper<T> = {
   identity: () => T;
   callback?: () => any;
-  children: () => ReactNode;
+  children: () => CellophaneTarget;
   accessorFn?: (x?: T) => any;
   validatorFn?: CellophaneValidationFn;
   initialState?: WrapperState | (() => WrapperState);
