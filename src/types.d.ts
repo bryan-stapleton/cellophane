@@ -2,6 +2,8 @@ import { ReactNode } from "react";
 
 export type CellophaneValidationFn = (x?: any) => boolean;
 
+export type CellophaneMapFn = (x?: any) => CellophaneWrapper<any>;
+
 export type CellophaneTarget = ReactNode;
 
 export type CacheState = {
@@ -14,14 +16,13 @@ export type WrapperStateTimeline = WrapperState[];
 export type WrapperState = {
   validated?: boolean | CellophaneValidationFn;
   validatorFn?: CellophaneValidationFn;
-  persist?: boolean;
   data?: any[] | Record<any, any>;
   cache?: CacheState | null;
 };
 
 export type CellophaneWrapperProps = {
   target: CellophaneTarget;
-  initialState?: WrapperState;
+  initialState: WrapperState;
   callback?: () => any | void;
 };
 
