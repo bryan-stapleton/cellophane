@@ -1,24 +1,24 @@
-import { WrapperState, WrapperStateTimeline } from "../types";
+import { WrapperState, WrapperStateTimeline } from "../../types";
 
-export enum TimelineReducationActionType {
+export enum TimelineReducerActionType {
   UPDATE = "UPDATE",
   REJECT = "REJECT",
 }
 
-export type TimelineReducerAction<T> = {
-  type: T;
+export type TimelineReducerAction<TimelineReducerActionType> = {
+  type: TimelineReducerActionType;
   payload: WrapperState;
 };
 
 export const timelineReducer = (
   state: WrapperStateTimeline,
-  action: TimelineReducerAction<TimelineReducationActionType>
+  action: TimelineReducerAction<TimelineReducerActionType>
 ): WrapperStateTimeline => {
   switch (action.type) {
     case "UPDATE": {
-      return typeof action.payload !== null
+      return typeof action.payload !== null || undefined
         ? [...state, action.payload]
-        : [...state];
+        : state;
     }
     case "REJECT": {
       console.log("rejected");

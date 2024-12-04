@@ -1,10 +1,13 @@
-import { useState, useEffect, useMemo, ReactNode, useReducer } from "react";
-import { z } from "zod";
+import { useState, useEffect, useMemo, useReducer } from "react";
 import {
-  TimelineReducationActionType,
+  TimelineReducerActionType,
   timelineReducer,
 } from "./reducers/timeline";
-import { CacheState, CellophaneWrapper, CellophaneWrapperProps } from "./types";
+import {
+  CacheState,
+  CellophaneWrapper,
+  CellophaneWrapperProps,
+} from "../types";
 
 export default function useCellophane({
   target,
@@ -35,7 +38,7 @@ export default function useCellophane({
 
   useEffect(() => {
     dispatch({
-      type: TimelineReducationActionType.UPDATE,
+      type: TimelineReducerActionType.UPDATE,
       payload: { data: ["test"] },
     });
   }, [cache]);
@@ -43,11 +46,6 @@ export default function useCellophane({
   wrapper["identity"] = () => typeof typeStasis;
   wrapper["children"] = () => typeStasis;
   wrapper["timeline"] = [initialState];
-
-  useEffect(() => {
-    console.log(Object.keys(wrapper));
-  }, []);
-
 
   return wrapper as CellophaneWrapper<typeof target>;
 }

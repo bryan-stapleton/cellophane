@@ -1,22 +1,22 @@
 import { ReactNode } from "react";
 
-export type CellophaneValidationFn = (x?: any) => boolean;
+export type CellophaneValidationFn<T> = (x?: T) => boolean;
 
 export type CellophaneMapFn = (x?: any) => CellophaneWrapper<any>;
 
 export type CellophaneTarget = ReactNode;
 
 export type CacheState = {
-  validated?: boolean | CellophaneValidationFn;
+  validated?: boolean | CellophaneValidationFn<any>;
   data?: any;
 };
 
 export type WrapperStateTimeline = WrapperState[];
 
 export type WrapperState = {
-  validated?: boolean | CellophaneValidationFn;
-  validatorFn?: CellophaneValidationFn;
-  data?: any[] | Record<any, any>;
+  validated?: boolean | CellophaneValidationFn<unknown>;
+  validatorFn?: CellophaneValidationFn<unknown>;
+  data?: Record<any, any>;
   cache?: CacheState | null;
 };
 
@@ -30,8 +30,8 @@ export type CellophaneWrapper<T> = {
   identity: () => T;
   callback?: () => any;
   children: () => CellophaneTarget;
-  accessorFn?: (x?: T) => any;
-  validatorFn?: CellophaneValidationFn;
+  accessorFn?: (x?: keyof T) => void;
+  validatorFn?: CellophaneValidationFn<T>;
   initialState?: WrapperState | (() => WrapperState);
   timeline?: WrapperStateTimeline;
   (): any;
